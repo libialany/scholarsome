@@ -66,7 +66,7 @@ import { TasksService } from "./providers/tasks.service";
     RedisModule.forRootAsync({
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => ({
-        defaultOptions: {
+        commonOptions: {
           host: configService.get<string>("REDIS_HOST"),
           port: configService.get<number>("REDIS_PORT"),
           username: configService.get<string>("REDIS_USERNAME"),
