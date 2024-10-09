@@ -14,7 +14,38 @@ export class SetsService {
     private readonly usersService: UsersService,
     private readonly storageService: StorageService
   ) {}
+  /**
+   * Get a random set with all cards
+   *
+   * @returns Set
+   */
+  public async randomSet(): Promise<Set> {
+    const setIds = await this.prisma.set.findMany({
+      select: {
+        id: true
+      }
+    });
 
+    const randomIndex = Math.floor(Math.random() * setIds.length);
+
+    return await this.prisma.set.findUnique({
+      where: {
+        id: setIds[randomIndex].id
+      },
+      include: {
+        cards: true,
+        folders: true,
+        author: {
+          select: {
+            id: true,
+            username: true,
+            createdAt: true,
+            updatedAt: true
+          }
+        }
+      }
+    });
+  }
   /**
    * Removes set media files from S3 or local storage
    *
