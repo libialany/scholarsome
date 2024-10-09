@@ -8,6 +8,10 @@ const routes: Routes = [
     loadChildren: () => import("./landing/landing.module").then((m) => m.LandingModule)
   },
   {
+    path: "random",
+    loadChildren: () => import("./random/random.module").then((m) => m.RandomModule)
+  },
+  {
     path: "create",
     loadChildren: () => import("./create/create.module").then((m) => m.CreateModule)
   },
