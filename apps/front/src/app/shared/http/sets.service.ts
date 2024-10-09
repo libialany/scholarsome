@@ -8,7 +8,24 @@ import { ApiResponse, ApiResponseOptions, Set } from "@scholarsome/shared";
 })
 export class SetsService {
   constructor(private readonly http: HttpClient) {}
+  /**
+   * Finds a random set
+   *
+   * @returns Queried `Set` object
+   */
+  async randomSet(): Promise<Set | null> {
+    let set: ApiResponse<Set> | undefined;
 
+    try {
+      set = await lastValueFrom(this.http.get<ApiResponse<Set>>("/api/sets"));
+    } catch (e) {
+      return null;
+    }
+
+    if (set.status === ApiResponseOptions.Success) {
+      return set.data;
+    } else return null;
+  }
   /**
    * Finds a unique set
    *
