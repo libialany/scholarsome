@@ -49,7 +49,27 @@ export class SetsController {
     private readonly authService: AuthService,
     private readonly foldersService: FoldersService
   ) {}
-
+    /**
+   * Gets random set
+   *
+   * @returns A `Set` object
+   * @remarks This MUST be placed before the route to ensure.
+   */
+  @ApiOperation({
+    summary: "Get random set",
+    description: "Gets a random set"
+  })
+  @ApiOkResponse({
+    description: "Expected response to a valid request",
+    type: SetsSuccessResponse
+  })
+  @Get("")
+  async myRandomSet(): Promise<ApiResponse<Set>> {
+    return {
+      status: ApiResponseOptions.Success,
+      data: await this.setsService.randomSet()
+    };
+  }
   /**
    * Gets the sets of the authenticated user
    *
