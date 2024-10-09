@@ -3,6 +3,7 @@ import { BrowserModule } from "@angular/platform-browser";
 import { AppComponent } from "./app.component";
 import { HttpClientModule } from "@angular/common/http";
 import { SharedModule } from "./shared/shared.module";
+import { RandomModule } from "./random/random.module";
 import {
   FontAwesomeModule,
   FaIconLibrary
@@ -55,6 +56,7 @@ Quill.register("modules/imageResize", ImageResize);
 @NgModule({
   declarations: [AppComponent, HeadScriptsComponent],
   imports: [
+    RandomModule,
     CreateModule,
     LandingModule,
     BrowserModule,
